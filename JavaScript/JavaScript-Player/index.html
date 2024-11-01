@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Player</title>
+    <link rel="stylesheet" href="./css/grid.css" />
+    <link rel="shortcut icon" href="./assets/svg/logo.svg" />
+  </head>
+  <body>
+    <aside id="aside" class="aside">
+      <div class="close">x</div>
+      <div class="aside-container">
+        <p id="vol" class="vol">Volume</p>
+        <input
+          type="range"
+          name="volumen"
+          id="volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        />
+        <p>Add to favorites</p>
+        <p>Add to playlist</p>
+        <p>Share</p>
+        <a class="credits" href="https://github.com/callibra"><p>Music Player create with<span class="heart"> ❤</span></p></a>
+      </div>
+    </aside>
+    <main>
+      <audio
+        id="audio"
+        src="assets/audio/Song-1.mp3"
+        ontimeupdate="updateProgress();"
+      ></audio>
+      <div class="wrapper">
+        <header class="header">
+          <img
+            id="config"
+            class="icon-dots"
+            src="./assets/svg/dots.svg"
+            alt="Icon dots"
+          />
+          <h1 class="title">Playing now!</h1>
+        </header>
+
+        <section class="cards">
+          <img id="cover" src="assets/img/Song-1.jpg" alt="Cover">
+        </section>
+        <section class="song">
+          <div class="song-name">
+            <h2 id="title">Song-1 - Music Player</h2>
+          </div>
+          <div class="progress-bar">
+            <div id="start" class="start">0:00</div>
+            <!-- <div class="bar"></div> -->
+            <progress id="progress" value="0" max="100"></progress>
+            <div id="end" class="end">0:00</div>
+          </div>
+        </section>
+        <footer class="buttons">
+          <div class="bucle">
+            <img src="./assets/svg/btn-bucle.svg" alt="Bucle" />
+          </div>
+          <div class="previous">
+            <img src="./assets/svg/btn-previous.svg" alt="Previous" />
+          </div>
+          <div class="play" id="boton">
+            <btn id="play-pause" class="play-pause"></btn>
+          </div>
+          <div class="next">
+            <img src="./assets/svg/btn-next.svg" alt="Next" />
+          </div>
+          <div class="shift">
+            <img src="./assets/svg/btn-shift.svg" alt="Shift" />
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

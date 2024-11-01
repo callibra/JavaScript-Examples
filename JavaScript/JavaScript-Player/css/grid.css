@@ -1,0 +1,633 @@
+:root {
+    --fond: #0D1436;
+    --special: #16FFE2;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+    display: grid;
+    position: relative;
+    grid-template-rows: 100px 300px repeat(2, auto);
+    height: 100vh;
+    width: 100vw;
+    background: var(--fond);
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    place-content: flex-end center;
+    width: 80%;
+    justify-self: center;
+}
+
+.icon-dots {
+    position: absolute;
+    height: 50px;
+    right: 0px;
+    top: 20px;
+    cursor: pointer;
+    padding: 5px;
+    padding-inline: 20px;
+}
+
+#playList {
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    background: black;
+    border-radius: 10px;
+    text-align: left;
+    opacity: 0.8;
+    color: var(--special);
+    font-size: 2rem;
+}
+
+.title {
+    color: #16FFE2;
+    text-shadow: .5px .5px black, 1px 1px black, 1.1px 1.1px #16FFE2aa, 1.2px 1.2px #16FFE299, 1.3px 1.3px #16FFE288, 1.4px 1.4px #16FFE277, 1.5px 1.5px #16FFE266, 1.6px 1.6px #16FFE255, 2px 2px #16FFE244;
+    font-size: 3.5rem;
+    filter: blur(.15px);
+    display: flex;
+    position: relative;
+    top: 30px;
+    letter-spacing: 2px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.cards::-webkit-scrollbar {
+    display: none;
+}
+
+#cover {
+    min-width: 220px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    display: flex;
+    place-content: center center;
+    box-shadow: 10px 10px 25px 10px black,
+        -10px -10px 25px var(--special);
+    border: double 10px transparent;
+    background-image: linear-gradient(var(--fond), var(--fond)), radial-gradient(circle at top left, var(--special) 40%, black);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-size: cover;
+    scroll-snap-align: center;
+}
+
+.song {
+    width: 100%;
+    height: 50px;
+}
+
+.song-name {
+    font-size: 1.4rem;
+    display: flex;
+    place-content: center;
+    color: var(--special);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px black, 1.2px 1.2px var(--special);
+    text-align: center;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: row;
+    place-content: center space-evenly;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--special);
+}
+
+.progress-bar div {
+    margin-inline: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.bar {
+    display: flex;
+    position: relative;
+    top: 3px;
+    height: 10px;
+    background-color: black;
+    box-shadow: 0px 0px 5px 0px #16FFE2aa;
+    border-radius: 10px;
+    min-width: 50%;
+    width: 60%;
+}
+
+.bar::before {
+    content: '';
+    width: 45%;
+    height: 10px;
+    border-radius: 10px;
+    background-color: var(--special);
+    box-shadow: -3px 0px 15px 0px #16FFE2;
+}
+
+.buttons {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    max-height: 50px;
+}
+
+.buttons div:not(.play) {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    place-content: center center;
+    border: double 3px transparent;
+    background-image: linear-gradient(var(--fond), var(--fond)), radial-gradient(circle at top left, var(--special) 40%, black);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    cursor: pointer;
+}
+
+.buttons div.play {
+    border-radius: 50%;
+    display: flex;
+    place-content: center center;
+    border: double 5px transparent;
+    background-image: linear-gradient(var(--fond), var(--fond)), radial-gradient(circle at top left, var(--special) 40%, black);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    cursor: pointer;
+}
+
+.buttons div:hover {
+    opacity: 1;
+    box-shadow: 3px 3px 20px black,
+        -3px -3px 20px #16FFE2;
+}
+
+.bucle img {
+    padding: 9px 15px 9px 17px;
+}
+
+.previous img {
+    padding: 9px 15px 9px 15px;
+}
+
+.buttons .play {
+    min-width: 70px;
+    width: 70px;
+    height: 70px;
+}
+
+.play {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-pause {
+    height: 40px;
+    width: 40px;
+    background-image: url('../assets/svg/btn-play.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 15px;
+}
+
+.button-play-pause {
+    height: 33px;
+    width: 33px;
+    background-image: url('../assets/svg/btn-pause.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.next img {
+    padding: 9px 15px 9px 15px;
+}
+
+.shift img {
+    padding: 7px 12px 7px 14px;
+}
+
+.buttons div:last-child,
+.buttons div:first-child {
+    display: flex;
+    position: relative;
+    top: -10px;
+}
+.bucle:hover::before, .previous:hover::before, .next:hover::before, .shift:hover::before, .play:hover::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    transform: rotate(45deg);
+    top: -25px;
+}
+
+.bucle:hover::after, .previous:hover::after, .next:hover::after, .shift:hover::after, .play:hover::after {
+    content: "";
+    position: absolute;
+    width: auto;
+    height: 20px;
+    background-color: #000000;
+    color: var(--special);
+    padding: 5px 10px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    top: -50px;
+}
+
+.bucle:hover::after {
+    content: "Bucle";
+}
+
+.previous:hover::after {
+    content: "Previous";
+}
+
+.play:hover::after {
+    content: "Play/Pause";
+}
+
+.next:hover::after {
+    content: "Next";
+}
+
+.shift:hover::after {
+    content: "Shift";
+}
+
+#progress {
+    width: 80%;
+    margin: 10px;
+    font-size: .6em;
+    line-height: 1.5em;
+    text-indent: .5em;
+    height: 1.8em;
+    background: #fff;
+    border-radius: 10px;
+}
+
+#progress:hover {
+    cursor: pointer;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: black;
+    box-shadow: 0px 0px 2px 0px #16FFE2;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--special) !important;
+    box-shadow: 0px 0px 15px 0px #16FFE2;
+    border-radius: 10px;
+}
+
+progress {
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-bar {
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+    border-radius: 10px;
+}
+
+.aside {
+    display: flex;
+    position: fixed;
+    width: 50vw;
+    height: 100vh;
+    max-width: 500px;
+    background-color: var(--fond);
+    top: 0;
+    right: -100%;
+    z-index: 1;
+    flex-direction: column;
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    color: var(--special);
+    box-shadow: -10px 0 10px 10px #00000088, -20px 0 10px 10px #00000044;
+    transition: all .3s;
+    text-align: center;
+}
+
+.aside-toggle {
+    right: 0;
+}
+
+.aside-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.aside-container p {
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.aside-container p:hover:not(.vol) {
+    background-color: #0D2456;
+}
+
+#vol {
+    cursor: default;
+    padding: 10px 0;
+}
+
+.heart {
+    color: red;
+}
+
+.credits {
+    text-decoration: none;
+    color: var(--special);
+}
+
+.close {
+    display: flex;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    align-self: flex-end;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#volume {
+    margin: 10px auto 20px;
+    cursor: pointer;
+    min-width: 130px;
+    width: 80%;
+}
+
+input[type=range] {
+    width: 100%;
+    margin: 5px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    background: #000000;
+    border: 1px solid #16ffe2;
+    border-radius: 25px;
+    width: 100%;
+    height: 10px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    margin-top: -6px;
+    width: 20px;
+    height: 20px;
+    background: #16ffe2;
+    border: 0;
+    border-radius: 50px;
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #0d0d0d;
+}
+
+input[type=range]::-moz-range-track {
+    background: #000000;
+    border: 1px solid #16ffe2;
+    border-radius: 25px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #16ffe2;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    border-width: 5px 0;
+    color: transparent;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #000000;
+    border: 1px solid #16ffe2;
+    border-radius: 50px;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #000000;
+    border: 1px solid #16ffe2;
+    border-radius: 50px;
+}
+
+input[type=range]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #16ffe2;
+    border: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 0px;
+    /*Needed to keep the Edge thumb centred*/
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #000000;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #0d0d0d;
+}
+
+@supports (-ms-ime-align:auto) {
+
+    /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+    input[type=range] {
+        margin: 0;
+        /*Edge starts the margin from the thumb, not the track as other browsers do*/
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .wrapper {
+        display: grid;
+        position: relative;
+        grid-template-rows: 80px minmax(250px, 1fr) 100px 150px;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+
+    .cards {
+        overflow: visible;
+    }
+
+    .cards div {
+        display: none;
+    }
+
+    .cards .center {
+        display: flex;
+        width: 40vh;
+        height: 40vh;
+        margin: 30px auto;
+    }
+
+    .progress-bar {
+        width: 80%;
+        margin: auto;
+        align-items: center;
+    }
+
+    .progress-bar div {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .title {
+        font-size: 5rem;
+    }
+
+    #progress {
+        height: 20px;
+    }
+
+    .progress-bar div {
+        font-size: 2rem;
+    }
+
+    #title {
+        font-size: 3.5rem;
+    }
+}
+
+.btn-active {
+    box-shadow: 3px 3px 20px black,
+        -3px -3px 20px #16FFE2;
+}
+
+.filter {
+    filter: brightness(0.4);
+}
+
+@media (orientation: landscape) and (max-width: 768px) and (max-height: 400px){
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 0;
+    }
+
+    .header {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-start;
+        height: 100px;
+        width: 100%;
+    }
+    
+    .cards {
+        grid-column: 1;
+        grid-row: 2;
+        background-color: #0D1436;
+    }
+
+    .cards .center {
+        height: 250px;
+        width: 250px;
+        min-width: 200px;
+        min-height: 200px;
+    }
+
+    .buttons {
+        position: relative;
+        margin-top: auto;
+        grid-column: 2;
+        grid-row: 2;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .song {
+        height: 100px;
+        grid-column: 2;
+        grid-row: 2;
+        margin: auto 0 100px;
+    }
+    .aside-container p {
+        padding: 10px 0;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 400px){
+    .aside{
+        width: 100vw;
+        right: -110%;
+    }
+    .aside-toggle{
+        right: 0;
+    }
+}
