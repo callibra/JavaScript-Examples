@@ -4,6 +4,15 @@
 
 This project demonstrates how **HTML, CSS, and JavaScript** can be combined to create a simple Android app download page with automatic link and file-age status checks.
 
+<p align="center">
+  <a href="https://js-website.ct.ws/App-Downloads/" target="_blank" rel="noopener noreferrer">
+    <img
+      src="https://img.shields.io/badge/🔍_Preview-Open_Website-6366F1?style=for-the-badge"
+      alt="Preview Website"
+    />
+  </a>
+</p>
+
 <img width="1926" height="1074" alt="1" src="https://github.com/user-attachments/assets/629a8462-f40c-45d2-ae90-3f4e34707641" />
 
 ## ✨ Features
