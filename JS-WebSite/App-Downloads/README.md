@@ -4,6 +4,8 @@
 
 This project demonstrates how **HTML, CSS, and JavaScript** can be combined to create a simple Android app download page with automatic link and file-age status checks.
 
+<img width="1926" height="1074" alt="1" src="https://github.com/user-attachments/assets/629a8462-f40c-45d2-ae90-3f4e34707641" />
+
 ## ✨ Features
 
 - 📥 **GitLab downloads** — provides download links for Android application files stored on GitLab.
@@ -37,6 +39,8 @@ This project demonstrates how **HTML, CSS, and JavaScript** can be combined to c
 - **JavaScript** — link checks, file-age calculation, and dynamic status display.
 - **GitLab** — hosts the Android application files.
 
+<img width="1920" height="1078" alt="2" src="https://github.com/user-attachments/assets/661c10a7-7703-482f-a03c-3bf2e9495d60" />
+
 ## 🎯 Project Purpose
 
 This is a small example of a practical download website. It brings Android app download links together in one place and gives visitors a quick indication of how recently the hosted files were updated.
@@ -49,7 +53,7 @@ This is a small example of a practical download website. It brings Android app d
 - 🔄 Add a refresh control to rerun the status checks.
 - 🛡️ Handle GitLab API limits and failed requests with clear error messages.
 
----
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/f4e5bb34-15c4-4a30-8c79-0064ff3d1ccb" />
 
 <p align="center">
   💚 <strong>Simple • Useful • Built with HTML, CSS & JavaScript</strong>
