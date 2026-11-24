@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Callibra WebSite</title>
+<link rel="icon" type="image/png" href="i.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #05060a;
+    --text: #f3f5fb;
+    --muted: #7b8497;
+    --b1: hsl(260 90% 60% / .35);
+    --b2: hsl(190 90% 55% / .28);
+    --b3: hsl(320 90% 60% / .22);
+    --dot: hsl(260 90% 65%);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Sora", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Aurora pozadina: boite se menuvaat so sekoj refresh */
+  .aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .aurora i {
+    position: absolute;
+    width: 70vmax; height: 70vmax;
+    border-radius: 50%;
+    animation: drift 26s ease-in-out infinite alternate;
+  }
+  .aurora i:nth-child(1) { top: -30vmax; left: -20vmax; background: radial-gradient(circle, var(--b1), transparent 65%); }
+  .aurora i:nth-child(2) { bottom: -35vmax; right: -25vmax; background: radial-gradient(circle, var(--b2), transparent 65%); animation-duration: 32s; animation-delay: -8s; }
+  .aurora i:nth-child(3) { top: 30%; left: 45%; width: 50vmax; height: 50vmax; background: radial-gradient(circle, var(--b3), transparent 65%); animation-duration: 38s; animation-delay: -15s; }
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(6vmax, 4vmax, 0) scale(1.12); }
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(40px, 8vw, 88px) clamp(16px, 4vw, 32px) 72px;
+  }
+  header { margin-bottom: clamp(28px, 5vw, 48px); }
+  h1 {
+    margin: 0;
+    font-size: clamp(2.6rem, 9vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: .95;
+  }
+  .count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 18px 0 0;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.04);
+    color: var(--muted);
+    font-size: .85rem;
+  }
+  .count::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dot);
+    box-shadow: 0 0 12px var(--dot);
+  }
+
+  #list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: clamp(10px, 2vw, 16px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .label {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "num . go" "txt txt txt";
+    grid-template-rows: auto 1fr;
+    gap: 30px 12px;
+    min-height: 160px;
+    padding: 18px;
+    border-radius: 26px;
+    color: var(--text);
+    text-decoration: none;
+    background:
+      radial-gradient(130% 120% at 0% 0%, color-mix(in srgb, var(--c) 16%, transparent), transparent 60%),
+      linear-gradient(165deg, rgba(255,255,255,.055), rgba(255,255,255,.012));
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px -26px rgba(0,0,0,.95);
+    transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+    animation: rise .6s cubic-bezier(.2,.7,.2,1) both;
+    animation-delay: calc(var(--i) * 60ms);
+  }
+  /* gradient rub */
+  .label::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--c) 75%, transparent), rgba(255,255,255,.07) 42%, rgba(255,255,255,.04));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  /* spotlight sleden od kursorot */
+  .label::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--c) 30%, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  .label:hover, .label:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 50px -22px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+  .label:hover::after, .label:focus-visible::after { opacity: 1; }
+  .label:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
+
+  .num {
+    grid-area: num;
+    display: grid;
+    place-items: center;
+    min-width: 52px;
+    height: 52px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background: linear-gradient(140deg, var(--c), var(--c2));
+    color: #07080d;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 10px 26px -8px var(--c), inset 0 1px 0 rgba(255,255,255,.4);
+  }
+  .txt { grid-area: txt; align-self: end; min-width: 0; }
+  .title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .host {
+    display: block;
+    margin-top: 4px;
+    font-size: .85rem;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .go {
+    grid-area: go;
+    width: 38px; height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.07);
+    color: var(--muted);
+    transition: background .25s ease, color .25s ease, transform .25s ease;
+  }
+  .label:hover .go, .label:focus-visible .go {
+    background: var(--c);
+    color: #07080d;
+    transform: rotate(-45deg);
+  }
+  .go svg { width: 18px; height: 18px; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* Telefon: kompaktni redovi */
+  @media (max-width: 560px) {
+    #list { grid-template-columns: 1fr; }
+    .label {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: "num txt go";
+      grid-template-rows: auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 0;
+      padding: 14px 16px;
+      border-radius: 22px;
+    }
+    .txt { align-self: center; }
+    .title { font-size: 1.1rem; }
+    .num { min-width: 48px; height: 48px; border-radius: 14px; }
+    .go { width: 34px; height: 34px; }
+  }
+  @media (hover: none) {
+    .label:hover { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aurora i, .label { animation: none; }
+    .label, .go { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<main>
+  <header>
+    <h1>WebSite List 🌐</h1>
+    <p class="count" id="count"></p>
+  </header>
+  <ul id="list"></ul>
+</main>
+
+<script>
+  // =====================================================
+  //  SAMO TUKA DODAVAJ NOVI LINKOVI (eden red = eden link)
+  //  Boja, red i broj se pravat avtomatski.
+  // =====================================================
+  const LINKS = [
+    { text: "App-Downloads",    url: "https://js-website.ct.ws/App-Downloads" },
+    { text: "Gallery",          url: "https://js-website.ct.ws/Gallery" },
+    { text: "Online-Radio",     url: "https://js-website.ct.ws/Online-Radio" },
+	{ text: "Ai-Radio",         url: "https://js-website.ct.ws/Online-Radio" },
+  ];
+  // =====================================================
+
+  const list = document.getElementById("list");
+  let prevHue = null;
+  const hues = [];
+
+  // Random nijansa, dovolno razlicna od prethodnata
+  function randomHue() {
+    let h, tries = 0;
+    do {
+      h = Math.floor(Math.random() * 360);
+      tries++;
+    } while (
+      prevHue !== null && tries < 50 &&
+      Math.min(Math.abs(h - prevHue), 360 - Math.abs(h - prevHue)) < 45
+    );
+    prevHue = h;
+    return h;
+  }
+
+  function hostOf(url) {
+    try { return new URL(url).hostname.replace(/^www\./, ""); }
+    catch (e) { return url; }
+  }
+
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  LINKS.forEach((item, i) => {
+    const h = randomHue();
+    hues.push(h);
+
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.className = "label";
+    a.href = item.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.style.setProperty("--i", i);
+    a.style.setProperty("--c", `hsl(${h} 90% 63%)`);
+    a.style.setProperty("--c2", `hsl(${(h + 40) % 360} 90% 58%)`);
+
+    const num = document.createElement("span");
+    num.className = "num";
+    num.textContent = i + 1;
+
+    const txt = document.createElement("span");
+    txt.className = "txt";
+
+    const title = document.createElement("span");
+    title.className = "title";
+    title.textContent = item.text;
+
+    const host = document.createElement("span");
+    host.className = "host";
+    host.textContent = hostOf(item.url);
+
+    txt.append(title, host);
+
+    const go = document.createElement("span");
+    go.className = "go";
+    go.innerHTML = ARROW;
+
+    a.append(num, txt, go);
+
+    // spotlight efekt (desktop)
+    a.addEventListener("pointermove", (e) => {
+      const r = a.getBoundingClientRect();
+      a.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      a.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+
+  // Aurora pozadina vo boite na labelite
+  if (hues.length) {
+    const root = document.documentElement.style;
+    const pick = (n) => hues[n % hues.length];
+    root.setProperty("--b1", `hsl(${pick(0)} 90% 60% / .35)`);
+    root.setProperty("--b2", `hsl(${pick(1)} 90% 55% / .28)`);
+    root.setProperty("--b3", `hsl(${pick(2)} 90% 60% / .22)`);
+    root.setProperty("--dot", `hsl(${pick(0)} 90% 65%)`);
+  }
+
+  document.getElementById("count").textContent = LINKS.length + " website";
+</script>
+</body>
+</html>
